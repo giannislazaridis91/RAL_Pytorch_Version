@@ -22,7 +22,7 @@ class Estimator:
     
 
 
-    def __init__(self, classifier_state_length, action_state_length, is_target_dqn, var_scope_name, bias_average):
+    def __init__(self, classifier_state_length, is_target_dqn, var_scope_name, bias_average):
 
         """
         Initializes the estimator.
@@ -40,7 +40,7 @@ class Estimator:
         """
 
         self.classifier_placeholder = tf.compat.v1.placeholder(tf.float32, shape=[None, classifier_state_length], name="X_classifier")
-        self.action_placeholder = tf.compat.v1.placeholder(tf.float32, shape=[None, action_state_length], name="X_datapoint")
+        self.action_placeholder = tf.compat.v1.placeholder(tf.float32, shape=[None, 1], name="X_datapoint")
 
         with tf.variable_scope(var_scope_name):
             
