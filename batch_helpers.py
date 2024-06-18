@@ -48,6 +48,19 @@ class ReplayBuffer:
             self._init_nparray(state, action, reward, next_state, next_action, terminal)
             return
 
+        if isinstance(state, torch.Tensor):
+            state = state.cpu().numpy()
+        if isinstance(action, torch.Tensor):
+            action = action.cpu().numpy()
+        if isinstance(reward, torch.Tensor):
+            reward = reward.cpu().numpy()
+        if isinstance(next_state, torch.Tensor):
+            next_state = next_state.cpu().numpy()
+        if isinstance(next_action, torch.Tensor):
+            next_action = next_action.cpu().numpy()
+        if isinstance(terminal, torch.Tensor):
+            terminal = terminal.cpu().numpy()
+
         # Write a transaction at a write_index position.
         self.all_states[self.write_index] = state
         self.all_action[self.write_index] = action
